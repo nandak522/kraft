@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-set -ex
-env
-
 if [[ -z "$CUSTOM_NODE_ID" ]]; then
     echo 'Using default node.id'
 else
