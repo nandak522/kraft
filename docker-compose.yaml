@@ -1,0 +1,75 @@
+services:
+  kafka-base:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: local/kafka-base:v3.5.0
+
+  kafka1:
+    image: local/kafka-base:v3.5.0
+    command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
+    environment:
+      # Below UUID is generated from https://uuid.rocks/short
+      CLUSTER_ID: "bPpdXy8F6e7P49b2LCPH69"
+      CUSTOM_NODE_ID: 1
+      CUSTOM_LOG_DIRS: "/opt/kafka-kraft-data"
+      CUSTOM_LISTENERS: "BROKER://:19092,CONTROLLER://:19093"
+      CUSTOM_ROLES: "broker,controller"
+      CUSTOM_CONTROLLER_QUORUM_VOTERS: "1@kafka1:19093,2@kafka2:29093,3@kafka3:39093"
+      CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
+    ports:
+      - 18092:18092
+      - 19092:19092
+    expose:
+      - "18092"
+      - "19092"
+
+  kafka2:
+    image: local/kafka-base:v3.5.0
+    command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
+    environment:
+      # Below UUID is generated from https://uuid.rocks/short
+      CLUSTER_ID: "bPpdXy8F6e7P49b2LCPH69"
+      CUSTOM_NODE_ID: 2
+      CUSTOM_LOG_DIRS: "/opt/kafka-kraft-data"
+      CUSTOM_LISTENERS: "BROKER://:29092,CONTROLLER://:29093"
+      CUSTOM_ROLES: "broker,controller"
+      CUSTOM_CONTROLLER_QUORUM_VOTERS: "1@kafka1:19093,2@kafka2:29093,3@kafka3:39093"
+      CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
+    ports:
+      - 28092:28092
+      - 29092:29092
+    expose:
+      - "28092"
+      - "29092"
+
+  kafka3:
+    image: local/kafka-base:v3.5.0
+    command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
+    environment:
+      # Below UUID is generated from https://uuid.rocks/short
+      CLUSTER_ID: "bPpdXy8F6e7P49b2LCPH69"
+      CUSTOM_NODE_ID: 3
+      CUSTOM_LOG_DIRS: "/opt/kafka-kraft-data"
+      CUSTOM_LISTENERS: "BROKER://:39092,CONTROLLER://:39093"
+      CUSTOM_ROLES: "broker,controller"
+      CUSTOM_CONTROLLER_QUORUM_VOTERS: "1@kafka1:19093,2@kafka2:29093,3@kafka3:39093"
+      CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
+    ports:
+      - 38092:38092
+      - 39092:39092
+    expose:
+      - "38092"
+      - "39092"
+
+  kafdrop:
+    depends_on:
+      - "kafka1"
+    image: obsidiandynamics/kafdrop:3.31.0
+    ports:
+      - 9000:9000
+    expose:
+      - "9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka1:19092,kafka2:29092,kafka3:39092"
+      SERVER_SERVLET_CONTEXTPATH: "/"
