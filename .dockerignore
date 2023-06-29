@@ -1,3 +1,5 @@
 /.env
 /.gitignore
 /LICENSE
+/README.md
+/docker-compose.yaml

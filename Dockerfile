@@ -9,7 +9,7 @@ COPY custom-start.sh /opt/kafka/bin/
 RUN apt-get update && apt-get install -y --no-install-recommends gpg-agent wget software-properties-common && \
     wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | apt-key add - && \
     add-apt-repository --yes https://packages.adoptium.net/artifactory/deb && \
-    apt-get install -y --no-install-recommends temurin-17-jdk libnet-rawip-perl libnet-pcap-perl libnetpacket-perl less lsof netcat net-tools wget
+    apt-get install -y --no-install-recommends temurin-20-jdk libnet-rawip-perl libnet-pcap-perl libnetpacket-perl less lsof netcat net-tools wget
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ >/etc/timezone && \
     chmod a+x /tmp/download-kafka.sh && \
