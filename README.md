@@ -19,3 +19,20 @@ docker build -t local/kafka-base:v3.5.0 .
 docker compose up kafka1 kafka2 kafka3 kafdrop
 ```
 `kafka1`, `kafka2` and `kafka3` use the above common/base image `local/kafka-base:v3.5.0`
+
+### Test using Metrics
+```sh
+PORT=39999
+unset KAFKA_JMX_OPTS && unset JMX_PORT && /opt/kafka/bin/kafka-run-class.sh org.apache.kafka.tools.JmxTool \
+  --one-time true \
+  --jmx-url service:jmx:rmi:///jndi/rmi://:${PORT}/jmxrmi \
+  --object-name kafka.controller:type=KafkaController,name=ActiveControllerCount
+```
+The above command should give an output like:
+```sh
+Trying to connect to JMX url: service:jmx:rmi:///jndi/rmi://:39999/jmxrmi
+time,"1688110063561"
+kafka.controller:type=KafkaController,name=ActiveControllerCount:Value,"1"
+```
+
+P.S: Above `unset`ting of certain env vars is because running the above `kafka-run-class.sh` command with `JMX_PORT` being set is throwing a weird `Port/Address already in use` exception.

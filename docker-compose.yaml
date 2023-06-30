@@ -10,13 +10,15 @@ services:
     command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
     environment:
       # Below UUID is generated from https://uuid.rocks/short
-      CLUSTER_ID: "bPpdXy8F6e7P49b2LCPH69"
+      CLUSTER_ID: ${CLUSTER_ID:-bPpdXy8F6e7P49b2LCPH69}
       CUSTOM_NODE_ID: 1
       CUSTOM_LOG_DIRS: "/opt/kafka-kraft-data"
       CUSTOM_LISTENERS: "BROKER://:19092,CONTROLLER://:19093"
       CUSTOM_ROLES: "broker,controller"
       CUSTOM_CONTROLLER_QUORUM_VOTERS: "1@kafka1:19093,2@kafka2:29093,3@kafka3:39093"
       CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
+      JMX_PORT: 19999
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
     ports:
       - 18092:18092
       - 19092:19092
@@ -29,13 +31,15 @@ services:
     command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
     environment:
       # Below UUID is generated from https://uuid.rocks/short
-      CLUSTER_ID: "bPpdXy8F6e7P49b2LCPH69"
+      CLUSTER_ID: ${CLUSTER_ID:-bPpdXy8F6e7P49b2LCPH69}
       CUSTOM_NODE_ID: 2
       CUSTOM_LOG_DIRS: "/opt/kafka-kraft-data"
       CUSTOM_LISTENERS: "BROKER://:29092,CONTROLLER://:29093"
       CUSTOM_ROLES: "broker,controller"
       CUSTOM_CONTROLLER_QUORUM_VOTERS: "1@kafka1:19093,2@kafka2:29093,3@kafka3:39093"
       CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
+      JMX_PORT: 29999
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
     ports:
       - 28092:28092
       - 29092:29092
@@ -48,13 +52,15 @@ services:
     command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
     environment:
       # Below UUID is generated from https://uuid.rocks/short
-      CLUSTER_ID: "bPpdXy8F6e7P49b2LCPH69"
+      CLUSTER_ID: ${CLUSTER_ID:-bPpdXy8F6e7P49b2LCPH69}
       CUSTOM_NODE_ID: 3
       CUSTOM_LOG_DIRS: "/opt/kafka-kraft-data"
       CUSTOM_LISTENERS: "BROKER://:39092,CONTROLLER://:39093"
       CUSTOM_ROLES: "broker,controller"
       CUSTOM_CONTROLLER_QUORUM_VOTERS: "1@kafka1:19093,2@kafka2:29093,3@kafka3:39093"
       CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
+      JMX_PORT: 39999
+      KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
     ports:
       - 38092:38092
       - 39092:39092
