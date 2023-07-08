@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from events import base_pb2 as events_dot_base__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x65vents/user-signedup.proto\x1a\x11\x65vents/base.proto\":\n\x0cUserSignedUp\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12\x19\n\x07\x63hannel\x18\x02 \x01(\x0e\x32\x08.Channelb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1a\x65vents/user-signedup.proto\x12\x06\x65vents\x1a\x11\x65vents/base.proto\"A\n\x0cUserSignedUp\x12\x0f\n\x07user_id\x18\x01 \x01(\x04\x12 \n\x07\x63hannel\x18\x02 \x01(\x0e\x32\x0f.events.Channelb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,6 +22,6 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'events.user_signedup_pb2', 
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _globals['_USERSIGNEDUP']._serialized_start=49
-  _globals['_USERSIGNEDUP']._serialized_end=107
+  _globals['_USERSIGNEDUP']._serialized_start=57
+  _globals['_USERSIGNEDUP']._serialized_end=122
 # @@protoc_insertion_point(module_scope)

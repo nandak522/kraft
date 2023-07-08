@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package events;
+
 enum Channel {
     ANDROID_MOBILE = 0;
     IOS_MOBILE = 1;

@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from events import base_pb2 as events_dot_base__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19\x65vents/order-placed.proto\x1a\x11\x65vents/base.proto\":\n\x0bOrderPlaced\x12\x10\n\x08order_id\x18\x01 \x01(\x04\x12\x19\n\x07\x63hannel\x18\x02 \x01(\x0e\x32\x08.Channel\"6\n\x12OrderStatusUpdated\x12\x10\n\x08order_id\x18\x01 \x01(\x04\x12\x0e\n\x06status\x18\x02 \x01(\t\";\n\x0eOrderCancelled\x12\x10\n\x08order_id\x18\x01 \x01(\x04\x12\x17\n\x0frefundToEWallet\x18\x02 \x01(\x08\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x19\x65vents/order-placed.proto\x12\x06\x65vents\x1a\x11\x65vents/base.proto\"A\n\x0bOrderPlaced\x12\x10\n\x08order_id\x18\x01 \x01(\x04\x12 \n\x07\x63hannel\x18\x02 \x01(\x0e\x32\x0f.events.Channel\"6\n\x12OrderStatusUpdated\x12\x10\n\x08order_id\x18\x01 \x01(\x04\x12\x0e\n\x06status\x18\x02 \x01(\t\";\n\x0eOrderCancelled\x12\x10\n\x08order_id\x18\x01 \x01(\x04\x12\x17\n\x0frefundToEWallet\x18\x02 \x01(\x08\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,10 +22,10 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'events.order_placed_pb2', _
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _globals['_ORDERPLACED']._serialized_start=48
-  _globals['_ORDERPLACED']._serialized_end=106
-  _globals['_ORDERSTATUSUPDATED']._serialized_start=108
-  _globals['_ORDERSTATUSUPDATED']._serialized_end=162
-  _globals['_ORDERCANCELLED']._serialized_start=164
-  _globals['_ORDERCANCELLED']._serialized_end=223
+  _globals['_ORDERPLACED']._serialized_start=56
+  _globals['_ORDERPLACED']._serialized_end=121
+  _globals['_ORDERSTATUSUPDATED']._serialized_start=123
+  _globals['_ORDERSTATUSUPDATED']._serialized_end=177
+  _globals['_ORDERCANCELLED']._serialized_start=179
+  _globals['_ORDERCANCELLED']._serialized_end=238
 # @@protoc_insertion_point(module_scope)

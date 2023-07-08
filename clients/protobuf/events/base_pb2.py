@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x65vents/base.proto*6\n\x07\x43hannel\x12\x12\n\x0e\x41NDROID_MOBILE\x10\x00\x12\x0e\n\nIOS_MOBILE\x10\x01\x12\x07\n\x03WEB\x10\x02\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x11\x65vents/base.proto\x12\x06\x65vents*6\n\x07\x43hannel\x12\x12\n\x0e\x41NDROID_MOBILE\x10\x00\x12\x0e\n\nIOS_MOBILE\x10\x01\x12\x07\n\x03WEB\x10\x02\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -21,6 +21,6 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'events.base_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _globals['_CHANNEL']._serialized_start=21
-  _globals['_CHANNEL']._serialized_end=75
+  _globals['_CHANNEL']._serialized_start=29
+  _globals['_CHANNEL']._serialized_end=83
 # @@protoc_insertion_point(module_scope)

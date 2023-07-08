@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package entities;
+
 enum OrderStatus {
     CREATED = 0;
     INPROGRESS = 1;
