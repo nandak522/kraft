@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message User {
+    uint64 id = 1;
+    string phone = 2;
+    string email = 3;
+    uint64 created_on = 4;
+    uint64 modified_on = 5;
+}

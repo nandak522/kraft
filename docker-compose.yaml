@@ -1,11 +1,12 @@
 services:
   kafka-base:
     build:
-      context: .
+      context: kafka
       dockerfile: Dockerfile
     image: local/kafka-base:v3.5.0
 
   kafka1:
+    container_name: kafka1
     image: local/kafka-base:v3.5.0
     command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
     environment:
@@ -27,6 +28,7 @@ services:
       - "19092"
 
   kafka2:
+    container_name: kafka2
     image: local/kafka-base:v3.5.0
     command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
     environment:
@@ -48,6 +50,7 @@ services:
       - "29092"
 
   kafka3:
+    container_name: kafka3
     image: local/kafka-base:v3.5.0
     command: [ "sh", "-c", "/opt/kafka/bin/custom-start.sh" ]
     environment:
@@ -69,6 +72,7 @@ services:
       - "39092"
 
   kafdrop:
+    container_name: kafdrop
     depends_on:
       - "kafka1"
     image: obsidiandynamics/kafdrop:3.31.0
@@ -79,3 +83,46 @@ services:
     environment:
       KAFKA_BROKERCONNECT: "kafka1:19092,kafka2:29092,kafka3:39092"
       SERVER_SERVLET_CONTEXTPATH: "/"
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.4.0
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      - kafka1
+      - kafka2
+      - kafka3
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'kafka1:19092,kafka2:29092,kafka3:39092'
+      SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
+
+  kafka-client:
+    build:
+      context: clients
+      dockerfile: Dockerfile
+    image: local/kafka-client:v2.1.1
+
+  producer:
+    image: local/kafka-client:v2.1.1
+    container_name: kafka-producer
+    volumes:
+      - ./clients/producer.py:/app/producer.py
+    environment:
+      - BROKERS=kafka1:19092,kafka2:29092,kafka3:39092
+      - TOPIC=test
+    command: [ "sh", "-c", "python3", "/app/producer.py" ]
+
+  consumer:
+    command: [ "sh", "-c", "python3", "/app/consumer.py" ]
+    image: local/kafka-client:v2.1.1
+    container_name: kafka-consumer
+    volumes:
+      - ./clients/consumer.py:/app/consumer.py
+    environment:
+      - BROKERS=kafka1:19092,kafka2:29092,kafka3:39092
+      - TOPIC=test
+      - CONSUMER_GROUP=test
+      - CONSUMER_INSTANCE_ID=1

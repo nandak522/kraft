@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum Channel {
+    ANDROID_MOBILE = 0;
+    IOS_MOBILE = 1;
+    WEB = 2;
+}

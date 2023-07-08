@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "events/base.proto";
+
+message OrderPlaced {
+    uint64 order_id = 1;
+    Channel channel = 2;
+}
+
+message OrderStatusUpdated {
+    uint64 order_id = 1;
+    string status = 2;
+}
+
+message OrderCancelled {
+    uint64 order_id = 1;
+    bool refundToEWallet = 2;
+}
