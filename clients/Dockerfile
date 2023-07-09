@@ -17,7 +17,7 @@ RUN apt-get clean && \
 WORKDIR /app
 COPY requirements.txt .
 RUN wget --no-check-certificate https://github.com/edenhill/librdkafka/archive/v2.1.1.zip && unzip -q v2.1.1.zip && rm v2.1.1.zip && cd librdkafka-2.1.1 && ./configure && make && make install && ldconfig \
-    && pip install -r /app/requirements.txt
+    && pip3 install -r /app/requirements.txt
 ENV BROKERS=localhost:9092
 ENV TOPIC=test
 CMD ["python"]

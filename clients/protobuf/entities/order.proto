@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package entities;
+package protobuf.entities;
 
 enum OrderStatus {
     CREATED = 0;

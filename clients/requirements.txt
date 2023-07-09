@@ -1,2 +1,1 @@
-confluent-kafka==2.1.1
-protobuf==4.23.4
+confluent-kafka[schema-registry,protobuf]==2.1.1

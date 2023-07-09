@@ -109,20 +109,25 @@ services:
     image: local/kafka-client:v2.1.1
     container_name: kafka-producer
     volumes:
-      - ./clients/producer.py:/app/producer.py
+      - ./clients/producer.py:/app/producer.py:ro
+      - ./clients/protobuf:/app/protobuf:ro
     environment:
-      - BROKERS=kafka1:19092,kafka2:29092,kafka3:39092
-      - TOPIC=test
-    command: [ "sh", "-c", "python3", "/app/producer.py" ]
+      BROKERS: 'kafka1:19092,kafka2:29092,kafka3:39092'
+      TOPIC: test
+      SCHEMA_REGISTRY_HOST: 'http://schema-registry:8081'
+    depends_on:
+      - schema-registry
+    command: [ "sh", "-c", "python3 /app/producer.py" ]
 
   consumer:
-    command: [ "sh", "-c", "python3", "/app/consumer.py" ]
     image: local/kafka-client:v2.1.1
     container_name: kafka-consumer
     volumes:
       - ./clients/consumer.py:/app/consumer.py
+      - ./clients/protobuf:/app/protobuf
     environment:
-      - BROKERS=kafka1:19092,kafka2:29092,kafka3:39092
-      - TOPIC=test
-      - CONSUMER_GROUP=test
-      - CONSUMER_INSTANCE_ID=1
+      BROKERS: 'kafka1:19092,kafka2:29092,kafka3:39092'
+      TOPIC: test
+      CONSUMER_GROUP: test
+      CONSUMER_INSTANCE_ID: 1
+    command: [ "sh", "-c", "python3 /app/consumer.py" ]

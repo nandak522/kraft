@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package events;
+package protobuf.events;
 
 enum Channel {
     ANDROID_MOBILE = 0;

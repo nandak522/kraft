@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package events;
+package protobuf.events;
 
-import "events/base.proto";
+import "protobuf/events/base.proto";
 
 message OrderPlaced {
     uint64 order_id = 1;
-    Channel channel = 2;
+    protobuf.events.Channel channel = 2;
 }
 
 message OrderStatusUpdated {

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package entities;
+package protobuf.entities;
 
 message User {
     uint64 id = 1;
