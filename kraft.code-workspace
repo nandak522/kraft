@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"protoc": {
+			"compile_on_save": true,
+			"options": [
+				"--proto_path=${workspaceRoot}/clients",
+				"--python_out=${workspaceRoot}/clients",
+			]
+		}
+	}
+}

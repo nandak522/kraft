@@ -5,7 +5,7 @@
 .DS_Store
 
 # VSCode Cruft
-*.code-workspace
+# *.code-workspace
 
 # Python Cruft
 __pycache__
