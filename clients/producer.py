@@ -10,6 +10,7 @@ from confluent_kafka.serialization import (
     MessageField,
 )
 from uuid import uuid4
+import random
 
 from protobuf.events import order_placed_pb2
 
@@ -23,6 +24,8 @@ assert TOPIC
 
 SCHEMA_REGISTRY_HOST = os.getenv("SCHEMA_REGISTRY_HOST")
 assert SCHEMA_REGISTRY_HOST
+
+MESSAGES_COUNT = os.getenv("MESSAGES_COUNT", "100")
 
 
 def main():
@@ -58,8 +61,11 @@ def main():
     )
     msg_key_serializer = StringSerializer("utf8")
 
-    for i in range(10000):
-        msg = order_placed_pb2.OrderPlaced(order_id=i, channel=0)
+    order_channels = range(3)
+    for i in range(1, int(MESSAGES_COUNT) + 1):
+        msg = order_placed_pb2.OrderPlaced(
+            order_id=i, channel=random.choice(order_channels)
+        )
         logging.debug("Producing msg: {}".format(i))
         kafka_producer.produce(
             topic=TOPIC,

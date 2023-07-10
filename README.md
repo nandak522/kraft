@@ -6,8 +6,8 @@
 * [Up to date Kafka](https://github.com/nandak522/kraft/blob/main/Dockerfile#L4)
 * [Up to date OpenJDK Java(20) from Adoptium](https://github.com/nandak522/kraft/blob/main/Dockerfile#L11)
 * Running in KRaft mode (without ZooKeeper)
-* A simple GUI to browse topics and msgs, powered by [Kafdrop](https://github.com/obsidiandynamics/kafdrop)
-    * Head over to http://localhost:9000 in your favorite browser
+* A simple GUI to browse topics and msgs, powered by [Kafka-UI from provectuslabs](https://github.com/provectuslabs/kafka-ui)
+    * Head over to http://localhost:8080 in your favorite browser
 
 ### Build
 ```sh
@@ -16,7 +16,7 @@ docker build -t local/kafka-base:v3.5.0 .
 
 ## Run
 ```sh
-docker compose up kafka1 kafka2 kafka3 kafdrop
+docker compose up kafka1 kafka2 kafka3 kafka-ui
 ```
 `kafka1`, `kafka2` and `kafka3` use the above common/base image `local/kafka-base:v3.5.0`
 

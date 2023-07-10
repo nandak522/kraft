@@ -80,18 +80,22 @@ services:
       - "39092"
       - "37071"
 
-  kafdrop:
-    container_name: kafdrop
-    depends_on:
-      - "kafka1"
-    image: obsidiandynamics/kafdrop:3.31.0
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:v0.7.1
     ports:
-      - 9000:9000
-    expose:
-      - "9000"
+      - 8080:8080
+    depends_on:
+      - kafka1
+      - schema-registry
     environment:
-      KAFKA_BROKERCONNECT: "kafka1:19092,kafka2:29092,kafka3:39092"
-      SERVER_SERVLET_CONTEXTPATH: "/"
+      KAFKA_CLUSTERS_0_NAME: kraft
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka1:19092,kafka2:29092,kafka3:39092"
+      KAFKA_CLUSTERS_0_METRICS_PORT: 19999
+      KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://schema-registry:8081
+      DYNAMIC_CONFIG_ENABLED: 'true' # not necessary, added for tests
+      KAFKA_CLUSTERS_0_AUDIT_TOPICAUDITENABLED: 'true'
+      KAFKA_CLUSTERS_0_AUDIT_CONSOLEAUDITENABLED: 'true'
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.4.0
@@ -124,6 +128,7 @@ services:
       BROKERS: 'kafka1:19092,kafka2:29092,kafka3:39092'
       TOPIC: test
       SCHEMA_REGISTRY_HOST: 'http://schema-registry:8081'
+      MESSAGES_COUNT: '500'
     depends_on:
       - schema-registry
     command: [ "sh", "-c", "python3 /app/producer.py" ]
