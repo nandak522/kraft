@@ -20,12 +20,15 @@ services:
       CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
       JMX_PORT: 19999
       KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+      KAFKA_OPTS: "-javaagent:/opt/kafka/jmx_prometheus_javaagent.jar=17071:/opt/kafka/jmx-prom-java-agent-config.yaml"
     ports:
       - 18092:18092
       - 19092:19092
+      - 17071:17071
     expose:
       - "18092"
       - "19092"
+      - "17071"
 
   kafka2:
     container_name: kafka2
@@ -42,12 +45,15 @@ services:
       CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
       JMX_PORT: 29999
       KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+      KAFKA_OPTS: "-javaagent:/opt/kafka/jmx_prometheus_javaagent.jar=27071:/opt/kafka/jmx-prom-java-agent-config.yaml"
     ports:
       - 28092:28092
       - 29092:29092
+      - 27071:27071
     expose:
       - "28092"
       - "29092"
+      - "27071"
 
   kafka3:
     container_name: kafka3
@@ -64,12 +70,15 @@ services:
       CUSTOM_INTER_BROKER_LISTENER_NAME: "BROKER"
       JMX_PORT: 39999
       KAFKA_JMX_OPTS: "-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+      KAFKA_OPTS: "-javaagent:/opt/kafka/jmx_prometheus_javaagent.jar=37071:/opt/kafka/jmx-prom-java-agent-config.yaml"
     ports:
       - 38092:38092
       - 39092:39092
+      - 37071:37071
     expose:
       - "38092"
       - "39092"
+      - "37071"
 
   kafdrop:
     container_name: kafdrop
